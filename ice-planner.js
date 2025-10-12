@@ -176,6 +176,7 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
   }
 //wow
   // Lit render the HTML
+  //dam
   render() {
     return html`
      <div class="team-card">
