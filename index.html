@@ -7,43 +7,154 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="Description" content="Demonstration for ice-planner">
 
-  <style>
-    :root, html, body {
-      margin: var(--ddd-spacing-0);
-      padding: var(--ddd-spacing-0);
+<style>
+
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #1a1a1a;
+      --border-color: #dcdcdc;
+      --accent-color: #0078d7;
+      --card-bg: #f8f9fa;
     }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #121212;
+        --text-color: #f1f1f1;
+        --border-color: #333333;
+        --accent-color: #4fc3f7;
+        --card-bg: #1e1e1e;
+      }
+    }
+
+    :root.dark-mode {
+      --bg-color: #fff8f8;
+      --text-color: #f1f1f1;
+      --border-color: #ffffff;
+      --accent-color: #4fc3f7;
+      --card-bg: #ffffff;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1,
+    h2 {
+      color: var(--accent-color);
+    }
+
+
     #demo {
-      margin: var(--ddd-spacing-2);
+      margin: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
     }
-    ice-planner {
-      margin: var(--ddd-spacing-2);
-      border: var(--ddd-border-md);
-      border-radius: var(--ddd-radius-lg);
+
+    ice-planner,
+    cost-calculator {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      width: 100%;
+      max-width: 800px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     }
-    ice-planner:hover {
-      box-shadow: var(--ddd-boxShadow-sm);
+
+    ice-planner:hover,
+    cost-calculator:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-    #example {
-      --ice-planner-font-size: var(--ddd-font-size-l);
-      background-color: var(--ddd-accent-2);
-      color: var(--ddd-primary-17);
+
+
+    @media (min-width: 600px) {
+      #demo {
+        margin: 2rem auto;
+        max-width: 700px;
+      }
+    }
+
+    @media (min-width: 900px) {
+      #demo {
+        max-width: 900px;
+      }
+    }
+
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 6px 0;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    }
+
+    .total-final {
+      font-weight: bold;
+      color: var(--accent-color);
+    }
+
+    #theme-toggle {
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #theme-toggle:hover {
+      background-color: #005a9e;
     }
   </style>
   <title>ice-planner</title>
 </head>
 
 <body>
-  <div id="demo">
-    <h1>ice-planner</h1>
-    <!-- this is going to do whatever the tag's defaults are -->
-    <h2>Default</h2>
+ <div id="demo">
+    <h1>Ice Planner</h1>
+
+
+    <button id="theme-toggle">Toggle Theme</button>
+
+
+    <h2>Test 1</h2>
     <ice-planner></ice-planner>
-    <h2>Slot usage</h2>
-    <ice-planner data-accent="2" data-primary="17"><div>Sample slot content</div></ice-planner>
-    <h2>Property usage</h2>
+
+    <h2>Test 2</h2>
+    <ice-planner data-accent="2" data-primary="17">
+      <div>Sample slot content</div>
+    </ice-planner>
+
+
+    <h2>Test 3</h2>
     <ice-planner id="example" title="Sample property title"></ice-planner>
+
+
+    <h2>Template</h2>
+    <cost-calculator></cost-calculator>
   </div>
+
+  <!-- JS modules -->
   <script type="module" src="./ice-planner.js"></script>
+  <script type="module" src="./cost-calculator.js"></script>
+
+    <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    toggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark-mode');
+    });
+  </script>
 
   <!-- Take HAX, the Web and you further down the rabbit hole -->
   <style>
